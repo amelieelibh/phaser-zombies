@@ -1,0 +1,14 @@
+.frame { 
+ background-color: transparent;
+ background-image: url(sprite-zombiewalk_odd_fastca808fb79780a892e78c7d60fb01b8dd.jpg);
+ background-repeat: no-repeat;
+ width: 64px;  }
+.frame-0 { background-position: 0 0; }
+.frame-1 { background-position: -128px 0; } 
+.frame-2 { background-position: -192px 0; } 
+.frame-3 { background-position: -256px 0; } 
+.frame-4 { background-position: -320px 0; } 
+.frame-5 { background-position: -384px 0; } 
+.frame-6 { background-position: -448px 0; } 
+.frame-7 { background-position: -512px 0; } 
+

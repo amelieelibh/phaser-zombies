@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>hello phaser!</title>
+        <style> body { margin: 0; background: #FFF; } </style>
+
+        <script src="src/constants.js"></script>
+
+        <script src="lib/jquery-2.1.1.min.js"></script>
+        <script src="lib/store.min.js"></script>
+        <script src="lib/phaser.js"></script>
+
+        <script src="src/Items.js"></script>
+        <script src="src/Weapons.js"></script>
+        <script src="src/Menu.js"></script>
+
+        <script src="src/AdventureEngine.js"></script>
+        <script src="src/BattleEngine.js"></script>
+        <script src="src/SessionManager.js"></script>
+        <script type="text/javascript">
+            var _states = function(game){};
+            function init() {
+                if (!store.enabled) {
+                    alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
+                    return;
+                }
+            }
+        </script>
+        <script src="src/state_boot.js"></script>
+        <script src="src/state_preload.js"></script>
+        <script src="src/state_battle.js"></script>
+    </head>
+    <body>
+        <div id="gamecont"></div>
+        <script type="text/javascript">
+            var utils = {};
+            utils.rgbToHex = function(r, g, b) {
+                return "0x" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            };
+            utils.drawBar = function(bar, xpos, ypos, fnColor, width, height, currVal, maxVal){
+                bar.clear();
+                var pct = (currVal / maxVal);
+
+                var c = fnColor(pct);
+                bar.beginFill(c);
+                bar.lineStyle(height, c, 1);
+
+                bar.moveTo(0, 0);
+                bar.lineTo(width * pct, 0);
+                bar.endFill();
+                bar.x = xpos;
+                bar.y = ypos;
+            };
+        </script>
+        <script type="text/javascript">
+            var VisualTimer = function(opts){};
+            var game;
+            window.onerror = function (errorMsg, url, lineNumber) {
+                //alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+            }
+            window.onload = function(){
+                init();
+                _states.GAME_WIDTH = /*1024;//*/window.innerWidth;
+                _states.GAME_HEIGHT = /*768;//*/window.innerHeight;
+                game = new Phaser.Game(_states.GAME_WIDTH, _states.GAME_HEIGHT, Phaser.CANVAS, 'gamecont');
+                game.state.add("boot", _states.stBoot, true);
+                game.state.add("preloader", _states.stPreload);
+                game.state.add("mainmenu", _states.stBattle);
+            };
+            $(function() {
+            });
+        </script>
+        <script src="src/VisualTimer.js"></script>
+    </body>
+</html>
